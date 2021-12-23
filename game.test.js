@@ -1,6 +1,6 @@
 
-const Ship = require('./factories/shipFactory')
-const Gameboard = require('./factories/gameboardFactory')
+const Ship = require('./src/factories/shipFactory')
+const Gameboard = require('./src/factories/gameboardFactory')
 
 test('create Ship and tests for hit too', () => {
     expect(new Ship("Submarine",2, ["B1","B2"])).toEqual({"name":"Submarine", "length":2, "positions": ["B1","B2"], "hits":[]})
