@@ -1,0 +1,23 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "",
+  "main": "game.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/genosynth/battleship.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/genosynth/battleship/issues"
+  },
+  "homepage": "https://github.com/genosynth/battleship#readme",
+  "devDependencies": {
+    "jest": "^27.4.5"
+  }
+}
