@@ -1,6 +1,10 @@
-const Ship = require("./src/factories/shipFactory")
-const Gameboard = require("./src/factories/gameboardFactory")
-const Player = require("./src/factories/playerFactory")
+
+const Ship = require("./factories/shipFactory")
+const Gameboard = require("./factories/gameboardFactory")
+const Player = require("./factories/playerFactory")
+
+
+
 
 
 let ship1 = new Ship("Carrier", 5, ["A1","B1","C1","D1","E1"])
@@ -49,4 +53,5 @@ player2.fireShot("E1", player1.gameBoard)
 console.log(player1)
 console.log(player1.gameBoard.checkForAllShipsSunk())
 console.log(player2.gameBoard.checkForAllShipsSunk())
+
 
