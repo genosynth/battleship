@@ -1,4 +1,4 @@
-
+// only used for manual testing :( 
 const Ship = require("./factories/shipFactory")
 const Gameboard = require("./factories/gameboardFactory")
 const Player = require("./factories/playerFactory")

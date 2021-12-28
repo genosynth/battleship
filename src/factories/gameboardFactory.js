@@ -2,7 +2,7 @@ class Gameboard {
 
     constructor(player,ships) {
 		this.player = player;
-		this.ships = ships;
+		this.ships = [];
         this.positionsOfShips = [];
         this.missedShots = [];
 

@@ -49,6 +49,7 @@
     background-size: 1em 1em;
     height: 100vh;
     
+    
   }
   
   
@@ -57,4 +58,23 @@
     color: #ffffff;
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     text-align: center;
+  }
+  
+  #axis {
+    top: -2%; /* this part centers the div in the centre */
+    padding: 1%;    
+    left: 50%;
+    position: relative;
+    margin-top: relative;
+    margin-left: -50px;
+  }
+
+  #console {
+    
+    height:8%;
+    font-size: 200%;
+    text-align: center;
+    color: #ffffff;
+    font-family: Haettenschweiler, sans-serif;
+    
   }

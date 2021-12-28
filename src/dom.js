@@ -2,6 +2,7 @@
 const container = document.getElementsByClassName("container");
 
 module.exports = function drawBoard(numOfSqbySq){
+    container[0].innerText = ""
     for (let i=0; i<(numOfSqbySq*numOfSqbySq); i++){ //Creates 10 by 10 boxes
     
     div = document.createElement('div');
