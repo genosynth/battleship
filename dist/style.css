@@ -1,6 +1,15 @@
+.forMainClass {
+  display:flex; 
+  top: -2%; /* this part centers the div in the centre */
+  left: 10%;
+  position: relative;
+  
+ 
+}
+
 .container {
     width: 680px; /*creates the size of the div box in rleative with the number of divs created inside*/
-    height: 680px;
+    height: 480px; /* or 680 */
     border: 10px solid black;
   
     top: -2%; /* this part centers the div in the centre */
@@ -12,10 +21,21 @@
     display: grid; /*this part sets the div as a grid*/
     grid-template-columns: repeat(10, auto);
     background-color: #ffffff;
-    padding: 0px;
-    
+    padding: 0px;  
     
   
+  }
+
+  .container-game {
+    width: 680px; /*creates the size of the div box in rleative with the number of divs created inside*/
+    height: 480px; /* or 680 */
+    border: 10px solid black;
+    
+    display: grid; /*this part sets the div as a grid*/
+    grid-template-columns: repeat(10, auto);
+    background-color: #ffffff;
+    padding: 0px;  
+
   }
   
   .grid-item {
@@ -50,6 +70,7 @@
     height: 100vh;
     
     
+    
   }
   
   
@@ -61,7 +82,7 @@
   }
   
   #axis {
-    top: -2%; /* this part centers the div in the centre */
+    top: -2%; /* this part centers the div in the centre           AXIS BUTTON */    
     padding: 1%;    
     left: 50%;
     position: relative;
@@ -78,3 +99,4 @@
     font-family: Haettenschweiler, sans-serif;
     
   }
+

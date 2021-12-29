@@ -5,12 +5,15 @@ const Gameboard = require("./factories/gameboardFactory");
 
 
 const drawBoard = require('./dom')
+const dom2 = require("./dom2");
+
+//dom2.updateCSS();
 
 
 var boxes = document.querySelectorAll("div")
 let variableCounter = 5; // used for length of ships when created
 var axis = "Z";
-shipNamesArray = ["Ghadek trid tissetja lismijiet tal vapuri tal player jekk trid","Patrol Boat","Cruiser","Submarine","Battleship","Carrier"]
+shipNamesArray = ["Patrol Boat","Cruiser","Submarine","Battleship","Carrier"]
 
 let player1 = new Player("Jean")
 let gameBoard = new Gameboard("player1")
@@ -18,7 +21,7 @@ player1.gameBoard = gameBoard;
 
 document.getElementById("axis").addEventListener("click", changeAxis);
 
-drawBoard(10)
+drawBoard(1)
 //document.getElementById("ship1").addEventListener("click", 
 
 displayMessage = (message) => {
@@ -26,7 +29,7 @@ displayMessage = (message) => {
 }
 displayMessage("Place Your "+shipNamesArray[variableCounter-1])
 
-placeShip("Ship", variableCounter)
+placeShip(shipNamesArray[variableCounter-1], variableCounter)
 //document.getElementById("ship2").addEventListener("click", placeSecondShip.bind(this, "Cannon", 4))
 
 
@@ -104,10 +107,10 @@ function placeShip(shipName,shipLength){
                                
                                     //box.replaceWith(box.cloneNode(true)) // clones all nodes without event listeners
                                     //box.addEventListener("mouseover", hoverOnListener.bind( this, i, shipLength ))
-                                    drawBoard(10);
+                                    drawBoard(1);
                                     updateYourBoard()
                                     displayMessage("Place Your "+shipNamesArray[variableCounter-1])
-                                    placeShip("Ship",variableCounter)
+                                    placeShip(shipNamesArray[variableCounter-1], variableCounter)
                                  
                                 return console.log("cannot put ship here") // we exit the function if position already taken
                             }
@@ -130,13 +133,20 @@ function placeShip(shipName,shipLength){
                 
             )
                      
-            drawBoard(10);
+            drawBoard(1);
             updateYourBoard()
             variableCounter--;
             displayMessage("Place Your "+shipNamesArray[variableCounter-1])
-            placeShip("Ship",variableCounter)    
+            placeShip(shipNamesArray[variableCounter-1], variableCounter)  
 
-            if (variableCounter==0){player1.gameBoard.assignPositions()}
+            if (variableCounter==0){
+                displayMessage("Attack!");
+                player1.gameBoard.assignPositions()
+                dom2.updateCSS();
+                drawBoard(2)
+                
+            }
+            
            //
             console.log(player1)
            
@@ -172,6 +182,11 @@ function changeAxis(){
     }
 }
 
+function setPlayer2(){
+    let player2 = new Player("CPU")
+    let gameBoard2 = new Gameboard("player2")
+player2.gameBoard = gameBoard2;
+}
 
 
 
