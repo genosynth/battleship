@@ -202,7 +202,9 @@ function updateP2Board(){
     }
 
 
-    if(player2.gameBoard.checkForAllShipsSunk()){return alert("You Win")}
+    if(player2.gameBoard.checkForAllShipsSunk()){return document.getElementById("console").innerText="You Win!"}
+    if(player1.gameBoard.checkForAllShipsSunk()){return document.getElementById("console").innerText="You Loose!"}
+    player2Attacks();
     startBattle();
     
     
@@ -298,42 +300,38 @@ function randomShipsP2(length){
 }
 
 function player2Attacks(){
+    let random = Number;
+    //if (player1.gameBoard.missedShots.includes(random)){let random = Math.floor(Math.random() * 100)+1;}
+
+    for ( random = Math.floor(Math.random() * 100)+1; player1.gameBoard.missedShots.includes(random)|| player1.gameBoard.ships[0].hits.includes(random) ||player1.gameBoard.ships[1].hits.includes(random)||player1.gameBoard.ships[2].hits.includes(random)||player1.gameBoard.ships[3].hits.includes(random)||player1.gameBoard.ships[4].hits.includes(random) ;){
+        random = Math.floor(Math.random() * 100)+1
+    }
+
+
+
     
+
+
+    player2.fireShot(random, player1.gameBoard)
+    console.log(player1)
+
+    let player1Board = document.getElementsByClassName("grid-item-p1")
+    player1.gameBoard.positionsOfShips
+
+    for (let i=1; i<player1Board.length+1; i++){
+        player1.gameBoard.ships.forEach((ship)=>{
+            ship.hits.forEach((hit)=>{
+                if (hit==i){player1Board[i-1].style.backgroundColor="red"} // red for hit
+                //if (hit!=i) {opponentsGridBoard[i-1].style.backgroundColor="black"}
+            })
+        })
+
+        player1.gameBoard.missedShots.forEach((miss)=>{
+            if (miss==i){player1Board[i-1].style.backgroundColor="rgb(11, 146, 146)"}
+        })
+
+    }
 }
 
 
 
-/* unused functions
-
-function placeSecondShip(shipName, shipLength){
-    
-    boxes = document.querySelectorAll("div")
-   for (let i=1; i<=100; i++){
-       boxes[i].addEventListener("mouseover", hoverOnListener.bind( this, i, shipLength )) // when function is called it will pass i as argument
-       boxes[i].addEventListener("mouseout", hoverOffListener.bind( this, i, shipLength ))
-             
-   }
-
-   for (let i=1; i<100; i++){
-       boxes[i].addEventListener("click", function(){
-           let ship = new Ship(shipName, shipLength, [i,i+1,i+2,i+3]) // ship name, length, positions
-           player1.gameBoard.ships.push(ship);
-           //player1.gameBoard.assignPositions()
-
-           boxes.forEach((box)=>{
-               box.addEventListener("mouseover", hoverOnListener.bind( this, i, shipLength ))
-               
-           })
-
-           
-           console.log(player1)
-          
-           drawBoard(10);
-           updateYourBoard()
-           
-       })
-   }
-
-}
-
-*/
