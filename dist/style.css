@@ -22,6 +22,8 @@
     grid-template-columns: repeat(10, auto);
     background-color: #ffffff;
     padding: 0px;  
+    animation: isem 2s;
+    
     
   
   }
@@ -35,7 +37,22 @@
     grid-template-columns: repeat(10, auto);
     background-color: #ffffff;
     padding: 0px;  
+    /*transition: 2s; */
 
+    animation: isem 3s;
+    
+  }
+
+  @keyframes isem {
+
+    0% {
+      opacity:0%
+    }
+    100%{
+      opacity:100%
+    }
+    
+  
   }
   
   .grid-item {
@@ -125,6 +142,6 @@
     text-align: center;
     color: #ffffff;
     font-family: Haettenschweiler, sans-serif;
-    
+    animation: isem 3s;
   }
 
