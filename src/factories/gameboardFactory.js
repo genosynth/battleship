@@ -23,7 +23,8 @@ class Gameboard {
                 el.positions.forEach((position)=>{
                     if (position==pos){
                         hit = true;
-                        el.hit(pos);
+                        if(!el.hits.includes(pos)){el.hit(pos)}
+                        
                         
                     }
                 })
@@ -31,16 +32,21 @@ class Gameboard {
 
            }
         })
-        if (hit==false){this.missedShots.push(coordinate)}
+        if (hit==false){
+            if(!this.missedShots.includes(coordinate)){this.missedShots.push(coordinate)}
+            
+        }
 
     }
 
     checkForAllShipsSunk(){
-        let answer = false;
+        let answers = [];
         this.ships.forEach((ship)=> {
-            answer = ship.isSunk()
+            answers.push(ship.isSunk())
         })
-        return answer
+
+        if (!answers.includes(false)) return true
+        
     }
 
 }

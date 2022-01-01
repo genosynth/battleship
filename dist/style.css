@@ -7,7 +7,7 @@
  
 }
 
-.container {
+.container { /* used when choosing player 1 ships */
     width: 680px; /*creates the size of the div box in rleative with the number of divs created inside*/
     height: 480px; /* or 680 */
     border: 10px solid black;
@@ -49,6 +49,34 @@
   
   .grid-item:hover {
       background-color: rgb(49, 46, 46);
+  }
+
+  .grid-item-p1 {
+    background-color: aqua;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 0px;
+    font-size: 30px;
+    text-align: center;
+    
+  }
+
+  .grid-item-hit {
+    background-color: rgb(255, 0, 0);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 0px;
+    font-size: 30px;
+    text-align: center;
+    
+    
+  }
+
+  .grid-item-miss {
+    background-color: rgb(49, 46, 46);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 0px;
+    font-size: 30px;
+    text-align: center;
+    
   }
   
   

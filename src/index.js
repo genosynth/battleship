@@ -18,6 +18,7 @@ shipNamesArray = ["Patrol Boat","Cruiser","Submarine","Battleship","Carrier"]
 let player1 = new Player("Jean")
 let gameBoard = new Gameboard("player1")
 player1.gameBoard = gameBoard;
+var player2 // declared glboally
 
 document.getElementById("axis").addEventListener("click", changeAxis);
 
@@ -142,8 +143,16 @@ function placeShip(shipName,shipLength){
             if (variableCounter==0){
                 displayMessage("Attack!");
                 player1.gameBoard.assignPositions()
-                dom2.updateCSS();
+                dom2.updateCSS(); //adds oppoent's gridboard to the IU
                 drawBoard(2)
+                dom2.updateP1BoxesCSS(); // to remove hover from p1 board by changing class
+                
+               //const p2 =  setPlayer2();
+               console.log(setPlayer2())
+               
+               
+                startBattle()                          
+                                            
                 
             }
             
@@ -157,8 +166,50 @@ function placeShip(shipName,shipLength){
     
 }
 
+function startBattle(){
+ 
+    for (let i=0; i<100; i++){
+        document.getElementsByClassName("grid-item")[i].addEventListener("click", function(){
+            player1.fireShot(i+1,player2.gameBoard)
+            console.log(player2)
+            updateP2Board() // drawBoard is used to redraw the boxes without the previous added event listeners
+        })
+    }
 
-function updateYourBoard(){
+    
+   
+ 
+     
+}
+
+
+function updateP2Board(){
+    drawBoard(2);
+    let opponentsGridBoard = document.getElementsByClassName("grid-item")
+
+    for (let i=0; i<opponentsGridBoard.length+1; i++){
+        player2.gameBoard.ships.forEach((ship)=>{
+            ship.hits.forEach((hit)=>{
+                if (hit==i){opponentsGridBoard[i-1].style.backgroundColor="red"} // red for hit
+                //if (hit!=i) {opponentsGridBoard[i-1].style.backgroundColor="black"}
+            })
+        })
+
+        player2.gameBoard.missedShots.forEach((miss)=>{
+            if (miss==i){opponentsGridBoard[i-1].style.backgroundColor="rgb(11, 146, 146)"}
+        })
+
+    }
+
+
+    if(player2.gameBoard.checkForAllShipsSunk()){return alert("You Win")}
+    startBattle();
+    
+    
+}
+
+
+function updateYourBoard(){ // this is used when placing your ships upon starting game
     let boxes = document.querySelectorAll("div");
     for (let i=1; i<=100; i++){
         for (let x=0; x<player1.gameBoard.ships.length; x++){
@@ -183,9 +234,71 @@ function changeAxis(){
 }
 
 function setPlayer2(){
-    let player2 = new Player("CPU")
+    player2 = new Player("CPU")
     let gameBoard2 = new Gameboard("player2")
-player2.gameBoard = gameBoard2;
+    player2.gameBoard = gameBoard2;
+
+   
+    
+    for (let i=4; i>-1; i--){ // starts generating ships with length 5,4,3,2 and 1
+        let boolean = false; // this is used to not push ships into player'array if coordinate is already in use
+        let array = randomShipsP2(i+1);
+        let ship = new Ship(shipNamesArray[i], i+1, array)
+        
+        for (let z=0; z<player2.gameBoard.ships.length; z++){
+            player2.gameBoard.ships[z].positions.forEach((position)=>{
+                if (array.includes(position)){
+                    //i=i+1; 
+                    console.log(array)
+                    boolean = true;//continue;
+                    return
+                }
+                
+            })
+        }
+
+        if (boolean==true){i=i+1}
+        if (boolean==false){player2.gameBoard.ships.push(ship)}
+
+        // player2.gameBoard.ships[0].positions 
+        //if (boolean == true){player2.gameBoard.ships.push(ship)}
+        //if (boolean == false){i++}
+    }
+    
+    player2.gameBoard.assignPositions()
+    return console.log(player2)
+}
+
+function randomShipsP2(length){
+    let xORy =  Math.floor(Math.random() * 2);
+
+    let array = []
+
+    if (xORy==0){ //x-axis positions
+        let random = Math.floor(Math.random() * (100-length))+1;
+
+        for (let z=0; z<length; z++){
+
+            array.push(random+z);
+        }
+    }
+
+    if (xORy==1){ // y-axis positions
+        let random = Math.floor(Math.random() * (100-(length*10)))+1;
+
+        for (let z=0; z<length*10; z=z+10){
+
+            array.push(random+z);
+        }
+
+    }
+
+    return array;
+
+}
+
+function player2Attacks(){
+    
 }
 
 

@@ -11,4 +11,16 @@ function updateCSS(){ // adds the other gameboard and puts it beside the otheron
     document.getElementById("axis").style.display="none"
 }
 
-module.exports = {updateCSS}
+function updateP1BoxesCSS(){ // updates class of each player 1's box so that no hover is done anymore
+
+    for (let i=0; i<100; i++){
+        document.getElementsByClassName("grid-item")[i].classList.add("grid-item-p1")    // add new class     
+    }
+
+    for (let i=0; i<100; i++){
+        document.getElementsByClassName("grid-item-p1")[i].classList.remove("grid-item")  // removes old class       
+    }
+
+}
+
+module.exports = {updateCSS, updateP1BoxesCSS}
