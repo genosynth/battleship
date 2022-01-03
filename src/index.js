@@ -163,6 +163,8 @@ function placeShip(shipName,shipLength){
 }
 
 function startBattle(){
+
+    if(player1.gameBoard.checkForAllShipsSunk()==true){return updateP2Board()}
  
     for (let i=0; i<100; i++){
         document.getElementsByClassName("grid-item")[i].addEventListener("click", function(){
@@ -344,6 +346,7 @@ function player2Attacks(number ){
         })
 
     }
+    
 }
 
 
