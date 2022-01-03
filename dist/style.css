@@ -54,6 +54,34 @@
     
   
   }
+
+  .container-game-destroy{
+  width: 680px; /*creates the size of the div box in rleative with the number of divs created inside*/
+    height: 480px; /* or 680 */
+    border: 10px solid black;
+    
+    display: grid; /*this part sets the div as a grid*/
+    grid-template-columns: repeat(10, auto);
+    background-color: #ffffff;
+    padding: 0px;  
+    opacity:20%;
+    /*transition: 2s; */
+
+    animation: destroy 3s;
+    
+  }
+
+  @keyframes destroy {
+
+    0% {
+      opacity:100%
+    }
+    100%{
+      opacity:20%
+    }
+    
+  
+  }
   
   .grid-item {
     background-color: aqua;

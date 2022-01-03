@@ -1,14 +1,9 @@
 const Ship = require("./factories/shipFactory")
 const Player = require("./factories/playerFactory")
 const Gameboard = require("./factories/gameboardFactory");
-//let ship1 = new Ship("Carrier", 5, ["A1","B1","C1","D1","E1"])
-
 
 const drawBoard = require('./dom')
 const dom2 = require("./dom2");
-
-//dom2.updateCSS();
-
 
 var boxes = document.querySelectorAll("div")
 let variableCounter = 5; // used for length of ships when created
@@ -19,18 +14,19 @@ let player1 = new Player("Jean")
 let gameBoard = new Gameboard("player1")
 player1.gameBoard = gameBoard;
 var player2 // declared glboally
+var prevHits =[];
+
 
 document.getElementById("axis").addEventListener("click", changeAxis);
-
 drawBoard(1)
-//document.getElementById("ship1").addEventListener("click", 
 
 displayMessage = (message) => {
     document.getElementById("console").textContent=message
 }
+
 displayMessage("Place Your "+shipNamesArray[variableCounter-1])
 
-placeShip(shipNamesArray[variableCounter-1], variableCounter)
+placeShip(shipNamesArray[variableCounter-1], variableCounter) // this function is constantly running, so its a game function too
 //document.getElementById("ship2").addEventListener("click", placeSecondShip.bind(this, "Cannon", 4))
 
 
@@ -175,10 +171,8 @@ function startBattle(){
             updateP2Board() // drawBoard is used to redraw the boxes without the previous added event listeners
         })
     }
-
     
-   
- 
+      
      
 }
 
@@ -202,10 +196,25 @@ function updateP2Board(){
     }
 
 
-    if(player2.gameBoard.checkForAllShipsSunk()){return document.getElementById("console").innerText="You Win!"}
-    if(player1.gameBoard.checkForAllShipsSunk()){return document.getElementById("console").innerText="You Loose!"}
-    player2Attacks();
-    startBattle();
+    if(player2.gameBoard.checkForAllShipsSunk()){
+        document.getElementsByClassName("container-game")[1].classList.add("container-game-destroy")
+        document.getElementsByClassName("container-game")[1].classList.remove("container-game")
+        return document.getElementById("console").innerText="You Win!"
+    }
+    if(player1.gameBoard.checkForAllShipsSunk()){
+        document.getElementsByClassName("container-game")[0].classList.add("container-game-destroy")
+        document.getElementsByClassName("container-game")[0].classList.remove("container-game")
+
+        return document.getElementById("console").innerText="You Loose!"
+    }
+
+    let newHits = player1.gameBoard.allHits;
+    if (newHits.length>prevHits.length){
+        player2Attacks(newHits[newHits.length-1])
+        return startBattle();
+    }
+    if (newHits.length==prevHits.length){player2Attacks(); return startBattle();}
+    //startBattle();
     
     
 }
@@ -299,24 +308,28 @@ function randomShipsP2(length){
 
 }
 
-function player2Attacks(){
+function player2Attacks(number ){
     let random = Number;
     //if (player1.gameBoard.missedShots.includes(random)){let random = Math.floor(Math.random() * 100)+1;}
-
+    
     for ( random = Math.floor(Math.random() * 100)+1; player1.gameBoard.missedShots.includes(random)|| player1.gameBoard.ships[0].hits.includes(random) ||player1.gameBoard.ships[1].hits.includes(random)||player1.gameBoard.ships[2].hits.includes(random)||player1.gameBoard.ships[3].hits.includes(random)||player1.gameBoard.ships[4].hits.includes(random) ;){
         random = Math.floor(Math.random() * 100)+1
-    }
+    }    
 
+    let adjacent = [1,-1]
+    let adj=adjacent[Math.floor(Math.random() * 2)]
 
+    if (number!=undefined && player1.gameBoard.allHits.includes(number+adj)==false && player1.gameBoard.missedShots.includes(number+adj)==false ){random = number+adj}
 
-    
-
-
+    prevHits = player1.gameBoard.allHits.slice();
     player2.fireShot(random, player1.gameBoard)
+    //let newHits = player1.gameBoard.allHits
+    //if (newHits.length>prevHits.length){ player2Attacks(newHits[newHits.length-1])}
+    //console.log(prevHits+" "+newHits)    
     console.log(player1)
 
     let player1Board = document.getElementsByClassName("grid-item-p1")
-    player1.gameBoard.positionsOfShips
+    
 
     for (let i=1; i<player1Board.length+1; i++){
         player1.gameBoard.ships.forEach((ship)=>{

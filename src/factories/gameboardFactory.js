@@ -5,6 +5,7 @@ class Gameboard {
 		this.ships = [];
         this.positionsOfShips = [];
         this.missedShots = [];
+        this.allHits = []
 
 	}
 
@@ -23,7 +24,7 @@ class Gameboard {
                 el.positions.forEach((position)=>{
                     if (position==pos){
                         hit = true;
-                        if(!el.hits.includes(pos)){el.hit(pos)}
+                        if(!el.hits.includes(pos)){el.hit(pos);this.allHits.push(pos)}
                         
                         
                     }
@@ -48,6 +49,8 @@ class Gameboard {
         if (!answers.includes(false)) return true
         
     }
+
+
 
 }
 
